@@ -1,0 +1,44 @@
+{
+  "validation_subset": {
+    "H0_no_hints": {
+      "n": 100,
+      "wer": 0.3808,
+      "cer": 0.193,
+      "term_error": 0.3482,
+      "n_terms": 247
+    },
+    "H5_key_terms": {
+      "n": 100,
+      "wer": 0.3836,
+      "cer": 0.1809,
+      "term_error": 0.4777,
+      "n_terms": 247
+    },
+    "H6_unrelated_terms": {
+      "n": 100,
+      "wer": 0.3734,
+      "cer": 0.1584,
+      "term_error": 0.5223,
+      "n_terms": 247
+    }
+  },
+  "test": {
+    "H0_no_hints": {
+      "n": 467,
+      "wer": 0.3869,
+      "cer": 0.212,
+      "term_error": 0.3622,
+      "n_terms": 1016
+    }
+  },
+  "chosen_on_validation": "H0_no_hints",
+  "test_code_mixed_slice": {
+    "H0_no_hints": {
+      "n": 289,
+      "wer": 0.4113,
+      "cer": 0.2501,
+      "term_error": 0.3687,
+      "n_terms": 998
+    }
+  }
+}

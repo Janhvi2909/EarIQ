@@ -77,11 +77,12 @@ def wer_diff_ci(per_a, per_b, n=2000):
 def run_config(tag, split, ids, gold, prompts, level):
     items = [(i, ROOT / gold[i]["audio_path"]) for i in ids]
     if level is None:
-        return run_cached(f"hi_{split}_{tag}", items, language="hi")
+        return run_cached(f"hi_{split}_{tag}", items, language="hi", word_timestamps=False)
     # prompts differ per clip -> transcribe clip by clip through the cache
     out = {}
     for i, a in items:
-        out.update(run_cached(f"hi_{split}_{tag}", [(i, a)], language="hi", prompt=prompts[level][i] or None))
+        out.update(run_cached(f"hi_{split}_{tag}", [(i, a)], language="hi", prompt=prompts[level][i] or None,
+                              word_timestamps=False))
     return out
 
 

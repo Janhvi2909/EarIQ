@@ -1,0 +1,27 @@
+{
+  "n_recordings": 25,
+  "clean": {
+    "n_entities": 119,
+    "normal_ai": 0.6134,
+    "eariq": 0.7647,
+    "eariq_gain_points": 15.1
+  },
+  "background_noise_10db": {
+    "n_entities": 119,
+    "normal_ai": 0.6303,
+    "eariq": 0.7563,
+    "eariq_gain_points": 12.6
+  },
+  "phone_line_8khz": {
+    "n_entities": 119,
+    "normal_ai": 0.6218,
+    "eariq": 0.7479,
+    "eariq_gain_points": 12.6
+  },
+  "speech_15pct_faster": {
+    "n_entities": 119,
+    "normal_ai": 0.6134,
+    "eariq": 0.7731,
+    "eariq_gain_points": 16.0
+  }
+}
