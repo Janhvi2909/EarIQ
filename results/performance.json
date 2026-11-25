@@ -1,0 +1,36 @@
+{
+  "hardware": "Apple M3 MacBook, 16 GB, speech model on the Mac GPU (large-v3-turbo fp16)",
+  "sequential": {
+    "n": 20,
+    "success_rate": 1.0,
+    "latency_p50_s": 5.772,
+    "latency_p95_s": 6.465,
+    "mean_audio_s": 4.16,
+    "real_time_factor": 1.351,
+    "eariq_layer_ms_p50": 0.3,
+    "eariq_layer_ms_p95": 0.855
+  },
+  "concurrent_4_users": {
+    "n": 12,
+    "success_rate": 1.0,
+    "latency_p50_s": 14.75,
+    "latency_p95_s": 23.882,
+    "throughput_req_per_min": 10.2
+  },
+  "failure_paths": {
+    "empty": {
+      "http": 400,
+      "message": "No audio received. Please record again."
+    },
+    "corrupt": {
+      "http": 400,
+      "message": "Couldn't read that audio. Please send a WAV recording."
+    },
+    "silence": {
+      "http": 200,
+      "message": "I couldn't hear anything. Try again a little closer to the mic."
+    }
+  },
+  "server_memory_mb": 250,
+  "m1_target_added_delay_under_200ms": true
+}
