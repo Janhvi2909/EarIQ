@@ -1,0 +1,19 @@
+{
+  "train_examples": 13749,
+  "train_sentences": {
+    "hindi": 2169,
+    "english": 2433
+  },
+  "validation": {
+    "hindi_validation": {
+      "n": 1388,
+      "accuracy": 0.7313,
+      "f1_complete": 0.6417
+    },
+    "english_validation": {
+      "n": 1290,
+      "accuracy": 0.8357,
+      "f1_complete": 0.7716
+    }
+  }
+}
