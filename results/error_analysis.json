@@ -1,0 +1,208 @@
+{
+  "n_entities": 1482,
+  "n_wrong_after_eariq": 433,
+  "fixed_by_eariq": 195,
+  "broken_by_eariq": 0,
+  "categories": {
+    "near_miss": {
+      "n": 329,
+      "share_of_errors": 0.76
+    },
+    "misheard": {
+      "n": 93,
+      "share_of_errors": 0.215
+    },
+    "heard_not_formatted": {
+      "n": 11,
+      "share_of_errors": 0.025
+    }
+  },
+  "worst_types": [
+    {
+      "type": "time",
+      "n": 60,
+      "wrong": 60,
+      "error_rate": 1.0,
+      "misheard": 10,
+      "near_miss": 50
+    },
+    {
+      "type": "phone_extension",
+      "n": 30,
+      "wrong": 27,
+      "error_rate": 0.9,
+      "misheard": 18,
+      "near_miss": 9
+    },
+    {
+      "type": "postal_address",
+      "n": 40,
+      "wrong": 35,
+      "error_rate": 0.875,
+      "near_miss": 32,
+      "heard_not_formatted": 2,
+      "misheard": 1
+    },
+    {
+      "type": "command",
+      "n": 50,
+      "wrong": 38,
+      "error_rate": 0.76,
+      "near_miss": 32,
+      "misheard": 5,
+      "heard_not_formatted": 1
+    },
+    {
+      "type": "currency_amount",
+      "n": 75,
+      "wrong": 46,
+      "error_rate": 0.613,
+      "near_miss": 45,
+      "heard_not_formatted": 1
+    },
+    {
+      "type": "file_path",
+      "n": 51,
+      "wrong": 31,
+      "error_rate": 0.608,
+      "near_miss": 28,
+      "misheard": 3
+    },
+    {
+      "type": "measurement",
+      "n": 61,
+      "wrong": 36,
+      "error_rate": 0.59,
+      "misheard": 33,
+      "heard_not_formatted": 2,
+      "near_miss": 1
+    },
+    {
+      "type": "url",
+      "n": 62,
+      "wrong": 33,
+      "error_rate": 0.532,
+      "misheard": 10,
+      "near_miss": 23
+    },
+    {
+      "type": "email_address",
+      "n": 65,
+      "wrong": 33,
+      "error_rate": 0.508,
+      "near_miss": 32,
+      "heard_not_formatted": 1
+    },
+    {
+      "type": "cli_flag",
+      "n": 44,
+      "wrong": 10,
+      "error_rate": 0.227,
+      "misheard": 4,
+      "near_miss": 6
+    },
+    {
+      "type": "domain_term",
+      "n": 20,
+      "wrong": 4,
+      "error_rate": 0.2,
+      "near_miss": 3,
+      "heard_not_formatted": 1
+    },
+    {
+      "type": "reference_id",
+      "n": 150,
+      "wrong": 24,
+      "error_rate": 0.16,
+      "near_miss": 23,
+      "misheard": 1
+    },
+    {
+      "type": "ip_address",
+      "n": 25,
+      "wrong": 4,
+      "error_rate": 0.16,
+      "near_miss": 4
+    },
+    {
+      "type": "environment_variable",
+      "n": 35,
+      "wrong": 5,
+      "error_rate": 0.143,
+      "near_miss": 5
+    },
+    {
+      "type": "product_code",
+      "n": 90,
+      "wrong": 12,
+      "error_rate": 0.133,
+      "near_miss": 10,
+      "misheard": 2
+    },
+    {
+      "type": "account_or_record_number",
+      "n": 65,
+      "wrong": 8,
+      "error_rate": 0.123,
+      "near_miss": 6,
+      "misheard": 2
+    },
+    {
+      "type": "code_symbol",
+      "n": 35,
+      "wrong": 4,
+      "error_rate": 0.114,
+      "near_miss": 4
+    },
+    {
+      "type": "date",
+      "n": 89,
+      "wrong": 9,
+      "error_rate": 0.101,
+      "near_miss": 9
+    },
+    {
+      "type": "port_number",
+      "n": 30,
+      "wrong": 3,
+      "error_rate": 0.1,
+      "near_miss": 3
+    },
+    {
+      "type": "version",
+      "n": 30,
+      "wrong": 2,
+      "error_rate": 0.067,
+      "misheard": 2
+    },
+    {
+      "type": "person_or_team_name",
+      "n": 18,
+      "wrong": 1,
+      "error_rate": 0.056,
+      "near_miss": 1
+    },
+    {
+      "type": "plain_number",
+      "n": 65,
+      "wrong": 3,
+      "error_rate": 0.046,
+      "heard_not_formatted": 3
+    },
+    {
+      "type": "phone_number",
+      "n": 60,
+      "wrong": 2,
+      "error_rate": 0.033,
+      "near_miss": 2
+    },
+    {
+      "type": "spelled_sequence",
+      "n": 97,
+      "wrong": 3,
+      "error_rate": 0.031,
+      "misheard": 2,
+      "near_miss": 1
+    }
+  ]
+}

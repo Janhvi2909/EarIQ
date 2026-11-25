@@ -32,7 +32,8 @@ from eariq.normalize import detok, format_tokens  # noqa: E402
 from experiments.log import log_run  # noqa: E402
 from src.listening_data import iter_supervised  # noqa: E402
 
-LOOSE = {"phone_number", "phone_extension", "account_or_record_number", "plain_number", "port_number"}
+LOOSE = {"phone_number", "phone_extension", "account_or_record_number", "plain_number", "port_number",
+         "spelled_sequence", "acronym_or_initialism"}  # separators ignored: R-I-N-A == R I N A == RINA
 EDGE = ".,;:!?\"'()"
 PUBLISHED_WHISPER_LARGE_V3 = {"CTEM": 0.876, "TSR": 0.543, "WER": 0.058, "source": "VoiceCodeBench paper, Table 6 (LLM verifier, hosted)"}
 

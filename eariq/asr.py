@@ -44,14 +44,14 @@ def load_audio(source) -> np.ndarray:
 def transcribe(audio, language: str | None = None, prompt: str | None = None,
                hotwords: str | None = None, beam_size: int = 1,
                model: str = DEFAULT_MODEL, compute_type: str = DEFAULT_COMPUTE,
-               device: str = DEFAULT_DEVICE) -> dict:
-    """Return transcript text plus per-word timing and confidence."""
+               device: str = DEFAULT_DEVICE, word_timestamps: bool = True) -> dict:
+    """Return transcript text plus per-word timing and confidence (word_timestamps=False: text only, faster)."""
     if not isinstance(audio, np.ndarray):
         audio = load_audio(audio)
     m = get_model(model, compute_type, device)
     t0 = time.perf_counter()
     segments, info = m.transcribe(audio, language=language, beam_size=beam_size,
-                                  word_timestamps=True, vad_filter=False,
+                                  word_timestamps=word_timestamps, vad_filter=False,
                                   condition_on_previous_text=False,
                                   initial_prompt=prompt, hotwords=hotwords)
     parts, words = [], []
@@ -98,4 +98,16 @@ def join_pieces(pieces: list[dict]) -> list[dict]:
                        "prob": min(out[-1]["prob"], w["prob"])}
         else:
             out.append({k: v for k, v in w.items() if k != "joined"})
+    return out
+
+
+def mark_joined(words: list[dict], text: str) -> list[dict]:
+    """Recover Whisper's word-start flags for cached pieces from the transcript text."""
+    out, pos = [], 0
+    for w in words:
+        idx = text.find(w["word"], pos)
+        joined = bool(out) and idx == pos and idx > 0 and not text[idx - 1].isspace()
+        out.append({**w, "joined": w.get("joined", joined)})
+        if idx >= 0:
+            pos = idx + len(w["word"])
     return out

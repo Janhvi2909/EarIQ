@@ -310,7 +310,7 @@ async function loadProof() {
       `${(s.normal_ai_entity_acc * 100).toFixed(1)}% → ${(s.eariq_entity_acc * 100).toFixed(1)}% exact on ${b.entities.n_recordings} real recordings`]);
     const d = b.dev_synthetic?.smart_listening_dictation;
     if (d && d.cut_off_normal_ai) cards.push([`−${Math.round((1 - d.cut_off_eariq / d.cut_off_normal_ai) * 100)}%`, "Cut-offs while dictating",
-      `${(d.cut_off_normal_ai * 100).toFixed(1)}% → ${(d.cut_off_eariq * 100).toFixed(1)}% on test calls with pauses`]);
+      `${(d.cut_off_normal_ai * 100).toFixed(0)}% → ${(d.cut_off_eariq * 100).toFixed(1)}% of synthetic test calls with a pause`]);
     const q = b.entities?.double_check;
     if (q) cards.push([`${q.questions_per_5_values.toFixed(1)} / 5`, "Follow-up questions", "Asks about 1 in 5 answers or fewer, as targeted"]);
     if (cards.length) {
@@ -324,3 +324,10 @@ async function loadProof() {
 setField("phone");
 pollHealth();
 loadProof();
+
+// Deep link for presenting: /#sample=phone|email|name|order plays that sample once the model is ready
+const deep = new URLSearchParams(location.hash.slice(1)).get("sample");
+if (deep) {
+  const go = () => (ready ? document.querySelector(`.sample[data-sample="${deep}"]`)?.click() : setTimeout(go, 500));
+  go();
+}

@@ -17,7 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from eariq import asr  # noqa: E402
 from eariq.capture import baseline_capture, capture  # noqa: E402
-from eariq.endpointing import DEFAULT_POLICY, simulate  # noqa: E402
+from eariq.endpointing import DEFAULT_POLICY, simulate_audio  # noqa: E402
+from eariq.vad import speech_segments  # noqa: E402
 from experiments.log import log_run  # noqa: E402
 
 INDIAN = {"Aman", "Rishi", "Tara"}
@@ -54,12 +55,15 @@ def main(confirm_below=None):
     recs = []
     for r in rows:
         h = hyp[r["id"]]
+        pieces = asr.mark_joined(h["words"], h["text"])
+        _, pauses = speech_segments(asr.load_audio(str(ROOT / r["audio_path"])))
         h["words"] = asr.merge_pieces(h["words"], h["text"])
         e = capture(h["words"], r["field"])
         b = baseline_capture(h["text"], r["field"])
         min_conf = e["confidence"] if e["confidence"] is not None else 0.0
-        cut_base, _ = simulate(h["words"], {"fixed": DEFAULT_POLICY["short"]}, r["field"])
-        cut_ours, _ = simulate(h["words"], DEFAULT_POLICY, r["field"])
+        # same as the product: pauses measured from the audio, decisions on words heard so far
+        cut_base, _ = simulate_audio(pieces, pauses, {"fixed": DEFAULT_POLICY["short"]}, r["field"])
+        cut_ours, _ = simulate_audio(pieces, pauses, DEFAULT_POLICY, r["field"])
         recs.append({"id": r["id"], "field": r["field"], "indian": r["voice"] in INDIAN,
                      "pause": r["pause_in_value"],
                      "base_ok": norm(r["field"], b["value"]) == norm(r["field"], r["gold"]),

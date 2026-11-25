@@ -1,0 +1,95 @@
+{
+  "n": 120,
+  "by_field": {
+    "phone": {
+      "n": 30,
+      "normal_ai": 1.0,
+      "eariq": 1.0
+    },
+    "email": {
+      "n": 30,
+      "normal_ai": 0.0,
+      "eariq": 0.267
+    },
+    "name": {
+      "n": 30,
+      "normal_ai": 0.767,
+      "eariq": 0.767
+    },
+    "id": {
+      "n": 30,
+      "normal_ai": 0.9,
+      "eariq": 0.933
+    }
+  },
+  "by_accent": {
+    "indian_english_voices": {
+      "n": 72,
+      "normal_ai": 0.681,
+      "eariq": 0.722
+    },
+    "us_uk_voices": {
+      "n": 48,
+      "normal_ai": 0.646,
+      "eariq": 0.771
+    }
+  },
+  "overall": {
+    "normal_ai": 0.667,
+    "eariq": 0.742
+  },
+  "confirm_threshold_sweep": [
+    {
+      "tau": 0.3,
+      "confirm_rate": 0.067,
+      "wrong_values_caught": 0.138
+    },
+    {
+      "tau": 0.4,
+      "confirm_rate": 0.092,
+      "wrong_values_caught": 0.172
+    },
+    {
+      "tau": 0.5,
+      "confirm_rate": 0.15,
+      "wrong_values_caught": 0.31
+    },
+    {
+      "tau": 0.6,
+      "confirm_rate": 0.225,
+      "wrong_values_caught": 0.552
+    },
+    {
+      "tau": 0.7,
+      "confirm_rate": 0.317,
+      "wrong_values_caught": 0.793
+    },
+    {
+      "tau": 0.8,
+      "confirm_rate": 0.458,
+      "wrong_values_caught": 0.897
+    },
+    {
+      "tau": 0.9,
+      "confirm_rate": 0.725,
+      "wrong_values_caught": 0.931
+    }
+  ],
+  "chosen_confirm_below": 0.5,
+  "smart_listening_dictation": {
+    "policy": {
+      "short": 0.6,
+      "long": 1.5,
+      "rules": true,
+      "hanging": true,
+      "model": true,
+      "model_threshold": 0.2
+    },
+    "baseline_fixed_timeout_s": 0.6,
+    "clips_with_pause_in_value": 44,
+    "cut_off_normal_ai": 1.0,
+    "cut_off_eariq": 0.068,
+    "fluent_clips_cut_off_normal_ai": 0.0,
+    "fluent_clips_cut_off_eariq": 0.0
+  }
+}

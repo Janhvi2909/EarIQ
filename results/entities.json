@@ -1,0 +1,272 @@
+{
+  "n_recordings": 300,
+  "n_entities": 1482,
+  "asr": "vcb_turbo",
+  "wer_normal_ai": 0.219,
+  "published_reference": {
+    "CTEM": 0.876,
+    "TSR": 0.543,
+    "WER": 0.058,
+    "source": "VoiceCodeBench paper, Table 6 (LLM verifier, hosted)"
+  },
+  "strict": {
+    "normal_ai_entity_acc": 0.5762,
+    "eariq_entity_acc": 0.7078,
+    "normal_ai_task_success": 0.12,
+    "eariq_task_success": 0.2033,
+    "relative_error_reduction": 0.3105,
+    "diff_95ci_speaker_bootstrap": [
+      0.1107,
+      0.1525
+    ]
+  },
+  "lenient": {
+    "normal_ai_entity_acc": 0.6626,
+    "eariq_entity_acc": 0.7132,
+    "normal_ai_task_success": 0.1567,
+    "eariq_task_success": 0.21,
+    "relative_error_reduction": 0.15,
+    "diff_95ci_speaker_bootstrap": [
+      0.039,
+      0.0632
+    ]
+  },
+  "by_type": {
+    "account_or_record_number": {
+      "n": 65,
+      "normal_ai": 0.8462,
+      "eariq": 0.8769
+    },
+    "acronym_or_initialism": {
+      "n": 85,
+      "normal_ai": 0.9529,
+      "eariq": 1.0
+    },
+    "cli_flag": {
+      "n": 44,
+      "normal_ai": 0.0,
+      "eariq": 0.7727
+    },
+    "code_symbol": {
+      "n": 35,
+      "normal_ai": 0.4,
+      "eariq": 0.8857
+    },
+    "command": {
+      "n": 50,
+      "normal_ai": 0.02,
+      "eariq": 0.24
+    },
+    "currency_amount": {
+      "n": 75,
+      "normal_ai": 0.3867,
+      "eariq": 0.3867
+    },
+    "date": {
+      "n": 89,
+      "normal_ai": 0.8989,
+      "eariq": 0.8989
+    },
+    "domain_term": {
+      "n": 20,
+      "normal_ai": 0.8,
+      "eariq": 0.8
+    },
+    "email_address": {
+      "n": 65,
+      "normal_ai": 0.0,
+      "eariq": 0.4923
+    },
+    "environment_variable": {
+      "n": 35,
+      "normal_ai": 0.0,
+      "eariq": 0.8571
+    },
+    "file_path": {
+      "n": 51,
+      "normal_ai": 0.0,
+      "eariq": 0.3922
+    },
+    "ip_address": {
+      "n": 25,
+      "normal_ai": 0.84,
+      "eariq": 0.84
+    },
+    "measurement": {
+      "n": 61,
+      "normal_ai": 0.4098,
+      "eariq": 0.4098
+    },
+    "percentage": {
+      "n": 50,
+      "normal_ai": 1.0,
+      "eariq": 1.0
+    },
+    "person_or_team_name": {
+      "n": 18,
+      "normal_ai": 0.9444,
+      "eariq": 0.9444
+    },
+    "phone_extension": {
+      "n": 30,
+      "normal_ai": 0.1,
+      "eariq": 0.1
+    },
+    "phone_number": {
+      "n": 60,
+      "normal_ai": 0.95,
+      "eariq": 0.9667
+    },
+    "plain_number": {
+      "n": 65,
+      "normal_ai": 0.9538,
+      "eariq": 0.9538
+    },
+    "port_number": {
+      "n": 30,
+      "normal_ai": 0.9,
+      "eariq": 0.9
+    },
+    "postal_address": {
+      "n": 40,
+      "normal_ai": 0.125,
+      "eariq": 0.125
+    },
+    "product_code": {
+      "n": 90,
+      "normal_ai": 0.8111,
+      "eariq": 0.8667
+    },
+    "reference_id": {
+      "n": 150,
+      "normal_ai": 0.8067,
+      "eariq": 0.84
+    },
+    "spelled_sequence": {
+      "n": 97,
+      "normal_ai": 0.9691,
+      "eariq": 0.9691
+    },
+    "time": {
+      "n": 60,
+      "normal_ai": 0.0,
+      "eariq": 0.0
+    },
+    "url": {
+      "n": 62,
+      "normal_ai": 0.0,
+      "eariq": 0.4677
+    },
+    "version": {
+      "n": 30,
+      "normal_ai": 0.7667,
+      "eariq": 0.9333
+    }
+  },
+  "by_accent": {
+    "american_california": {
+      "n": 68,
+      "normal_ai": 0.5735,
+      "eariq": 0.6912
+    },
+    "american_general": {
+      "n": 919,
+      "normal_ai": 0.5811,
+      "eariq": 0.7149
+    },
+    "american_midwest": {
+      "n": 72,
+      "normal_ai": 0.6528,
+      "eariq": 0.7639
+    },
+    "american_new_york": {
+      "n": 79,
+      "normal_ai": 0.6076,
+      "eariq": 0.7215
+    },
+    "american_southern": {
+      "n": 73,
+      "normal_ai": 0.5479,
+      "eariq": 0.7397
+    },
+    "british_northern": {
+      "n": 7,
+      "normal_ai": 0.5714,
+      "eariq": 0.5714
+    },
+    "british_rp": {
+      "n": 66,
+      "normal_ai": 0.6818,
+      "eariq": 0.7879
+    },
+    "canadian": {
+      "n": 24,
+      "normal_ai": 0.7083,
+      "eariq": 0.7917
+    },
+    "eastern_european": {
+      "n": 7,
+      "normal_ai": 0.2857,
+      "eariq": 0.5714
+    },
+    "indian": {
+      "n": 26,
+      "normal_ai": 0.3846,
+      "eariq": 0.5769
+    },
+    "kenyan": {
+      "n": 12,
+      "normal_ai": 0.75,
+      "eariq": 0.75
+    },
+    "neutral": {
+      "n": 28,
+      "normal_ai": 0.4286,
+      "eariq": 0.5357
+    },
+    "nigerian": {
+      "n": 76,
+      "normal_ai": 0.4868,
+      "eariq": 0.6184
+    },
+    "russian_moscow": {
+      "n": 4,
+      "normal_ai": 0.25,
+      "eariq": 0.25
+    },
+    "spanish_mexican": {
+      "n": 21,
+      "normal_ai": 0.4286,
+      "eariq": 0.619
+    }
+  },
+  "by_difficulty": {
+    "dense": {
+      "n": 479,
+      "normal_ai": 0.5553,
+      "eariq": 0.666
+    },
+    "light": {
+      "n": 90,
+      "normal_ai": 0.6,
+      "eariq": 0.7667
+    },
+    "standard": {
+      "n": 456,
+      "normal_ai": 0.557,
+      "eariq": 0.7259
+    },
+    "stress": {
+      "n": 457,
+      "normal_ai": 0.6127,
+      "eariq": 0.7221
+    }
+  },
+  "double_check": {
+    "confirm_below": 0.5,
+    "questions_per_5_values": 0.405,
+    "wrong_values_caught": 0.1501,
+    "flagged_that_were_wrong": 0.5417,
+    "always_confirm_questions_per_5_values": 5.0
+  }
+}
