@@ -38,7 +38,7 @@ Chosen on validation: **{NAMES[best]}**.
 |---|---|---|---|
 """ + "\n".join(f"| {NAMES[k]} | {p1(m['wer'])} | {p1(m['cer'])} | {p1(m['term_error'])} |" for k, m in cm.items()) + f"""
 
-**Reading.** Hindi is much harder for the same model than English (WER {p1(h0['wer'])} vs about 22% on English workplace speech). Key-term hints are the contextual-biasing condition a product can use when it knows its domain vocabulary (product names, drug names); unrelated hints test what happens when that list is wrong. Hindi digit words (एक, दो, तीन…) and Hinglish digits (ek, do, teen…) are also handled by format-aware hearing."""
+**Reading.** Hindi is much harder for the same model than English (WER {p1(h0['wer'])} vs about 22% on English workplace speech). **Hint lists did not help Whisper.** On validation, key-term hints left WER unchanged ({p1(v['H5_key_terms']['wer'])} vs {p1(v['H0_no_hints']['wer'])}) and *raised* borrowed-term error ({p1(v['H5_key_terms']['term_error'])} vs {p1(v['H0_no_hints']['term_error'])}). Even *unrelated* hints lowered CER ({p1(v['H6_unrelated_terms']['cer'])} vs {p1(v['H0_no_hints']['cer'])}). This means a Hindi-script prompt mainly shifts the output script (English loanwords get written in Devanagari with spellings that differ from the reference), rather than teaching vocabulary. So the no-hint setting was chosen and is what EarIQ uses. Real contextual biasing for Hindi needs a different mechanism (keyword boosting during decoding, or fine-tuning on the train split), which is listed as future work. Hindi digit words (एक, दो, तीन…) and Hinglish digits (ek, do, teen…) are also handled by format-aware hearing."""
 
 robust_md = """Same 25 VoiceCodeBench recordings, re-transcribed under three harder conditions; strict exact-value scorer.
 
@@ -100,8 +100,9 @@ scorecard = f"""| Target (M1) | Measured | Verdict |
 | ≤ 1 clarification per 5 eligible answers | {dc['questions_per_5_values']:.2f} per 5 | Met |
 | p95 added processing < 200 ms | {seq['eariq_layer_ms_p95']:.1f} ms (API); {lay['p95']} ms (offline, 67 s recordings) | Met |"""
 
-readme_rows = (f"| Hindi test WER ({'no hints' if best == 'H0_no_hints' else 'key-term hints'}; 467 clips) | {p1(h0['wer'])} | {p1(hb['wer'])} | |\n"
-               f"| Added delay from EarIQ (p95, API) | | **{seq['eariq_layer_ms_p95']:.1f} ms** | < 200 ms ✅ |\n"
+readme_rows = ((f"| Hindi / Hinglish test WER (467 clips; same model, hint lists didn't help) | {p1(h0['wer'])} | {p1(h0['wer'])} | |\n"
+                if best == "H0_no_hints" else f"| Hindi test WER (key-term hints; 467 clips) | {p1(h0['wer'])} | {p1(hb['wer'])} | |\n")
+               + f"| Added delay from EarIQ (p95, API) | | **{seq['eariq_layer_ms_p95']:.1f} ms** | < 200 ms ✅ |\n"
                f"| Answer latency on a laptop (p50 / p95) | | {seq['latency_p50_s']:.1f} s / {seq['latency_p95_s']:.1f} s | |")
 
 key_numbers = f"""- Exact values: **{p1(st['normal_ai_entity_acc'])} → {p1(st['eariq_entity_acc'])}**, −{st['relative_error_reduction'] * 100:.0f}% errors (target −30%); CI +{st['diff_95ci_speaker_bootstrap'][0] * 100:.1f} to +{st['diff_95ci_speaker_bootstrap'][1] * 100:.1f} points. Priority fields 76.5% → 84.8% (−35%). Emails 0% → 49%. 195 fixed, 0 broken.

@@ -1,65 +1,95 @@
-# Voice AI that listens better — industry NLP project
+# EarIQ
 
-The problem covers voice assistants, mic dictation, voice search and agent platforms: preserving important information across accents, languages and contexts. A support call is one motivating use case. **The original M1 PDF is unchanged.**
+**Voice AI that gets the details right.** EarIQ is a plug-in capture layer for voice assistants and voice agents. It captures phone numbers, emails, names and IDs **exactly**, waits while people pause in the middle of a value, and asks only about the part it is unsure of.
 
-- Present M1 with [M1 script.md](<M1 script.md>).
-- Present executed M2 work with [M2 script.md](<M2 script.md>).
-- Read the [measured M2 report](reports/M2_Data_Report.md), [project data card](docs/data_cards/PROJECT.md), [privacy policy](docs/PRIVACY.md) and [EDA figure PDF](reports/M2_EDA_Figures.pdf).
-- Explore [the executed notebook](notebooks/M2_EDA.ipynb). Detailed CSVs/JSON are under `reports/`.
+NLP course · Industry Track · Janhvi Yadav (230117) · Ronit Choudhary (230074) · Asmit Kumar (230063) · Vaishnav Verma (230160)
 
-## Reproduce
+![EarIQ: typical voice AI vs EarIQ on the same recording](docs/images/app_name_compare.png)
 
-Python 3.14 was used locally. `requirements.lock.txt` records exact installed versions; `requirements.txt` records direct dependencies. Audio acquisition requires internet access; subsequent preparation is local. Download about 3.3 GB; allow additional space for ~1.9 GB prepared audio and the environment. No credentials or paid model APIs are required for the selected files.
+## Run it (2 commands)
 
 ```bash
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.lock.txt
-.venv/bin/python scripts/acquire_data.py --inspect
-.venv/bin/python scripts/acquire_data.py
-.venv/bin/python scripts/run_m2.py
+python3 -m venv .venv && .venv/bin/pip install -r requirements-app.txt
+.venv/bin/uvicorn app.server:app --port 8000      # open http://localhost:8000
 ```
 
-The checked-in `configs/sources.json` pins actual dataset revisions. `--inspect` obtains pinned metadata/license files for selected sources and probes current access for unused alternatives. For this delivered run all manifests correspond to the configured pins. Network/download actions may need your environment's network permission. Notebook execution needs permission to open local Jupyter communication sockets.
+The speech model (Whisper large-v3-turbo, ~1.6 GB) downloads on first start and runs **on your machine**: Apple-silicon GPU if available, otherwise CPU. No API keys, no audio leaves the device. Docker: `docker compose up --build`.
 
-To avoid unnecessary reprocessing when viewing an existing run:
+| Page | What it shows |
+|---|---|
+| `/` | The product: choose what the agent asks for, speak (or play a sample), see **typical voice AI vs EarIQ** side by side |
+| `/monitor` | Live monitoring: latency p50/p95, follow-up rate, errors, alerts, recent requests (values masked) |
+| `/docs` | Interactive API docs (`POST /api/v1/capture`, `/api/v1/health`, `/api/v1/metrics`, `/metrics`) |
+
+## How it works
+
+| | Smart listening | Format-aware hearing | Smart double-check |
+|---|---|---|---|
+| **Problem** | A fixed silence timeout cuts people off mid-number | "nine eight seven…" is not a value software can use | Re-asking everything annoys people; guessing saves wrong data |
+| **EarIQ** | Waits longer while a value is provably unfinished (pauses measured from audio + a trained "finished?" model) | Spoken forms → exact values: digits, spelled letters, "at the rate", dot/dash/underscore, Hindi digit words; format checks | Saves when sure, confirms only the unsure part, asks again when the format is invalid; never invents a digit |
+
+## Results
+
+Same speech model (Whisper large-v3-turbo) with and without EarIQ. Test sets were never used for tuning.
+
+| What we measured | Normal AI | EarIQ | M1 target |
+|---|---|---|---|
+| Exact values, all 26 types (VoiceCodeBench, 300 real recordings, 1,482 values) | 57.6% | **70.8%** (−31% errors) | −30% errors ✅ |
+| Exact values, phones / emails / names / IDs (545 values) | 76.5% | **84.8%** (−35% errors) | |
+| Recordings with every value exact | 12.0% | **20.3%** | |
+| Values fixed / broken by EarIQ | | **195 fixed / 0 broken** | |
+| Cut-offs while dictating, 0.9 s pause inside the value (synthetic voices) | 100% | **6.8%** (−93%) | −50% ✅ |
+| Cut-offs in open conversation, same average wait (LiveKit held-out half) | 11.3% | 11.0% (no significant change) | not met |
+| Follow-up questions per 5 values | | **0.4** | ≤ 1 ✅ |
+| Hindi / Hinglish test WER (467 clips; same model, hint lists didn't help) | 38.7% | 38.7% | |
+| Added delay from EarIQ (p95, API) | | **0.9 ms** | < 200 ms ✅ |
+| Answer latency on a laptop (p50 / p95) | | 5.8 s / 6.5 s | |
+
+![Exact values on the fields voice agents ask for most](results/figures/priority_fields.png)
+
+Full method, error analysis and limitations: **[Technical report (PDF)](docs/report/EarIQ_Technical_Report.pdf)**. Every run is logged in [`results/experiment_log.csv`](results/experiment_log.csv).
+
+## Reproduce the evaluation
 
 ```bash
-.venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python scripts/verify_data.py
+.venv/bin/pip install -r requirements.lock.txt -r requirements-app.txt
+.venv/bin/python scripts/acquire_data.py && .venv/bin/python scripts/run_m2.py     # M2 data (≈3.3 GB download)
+.venv/bin/python experiments/run_asr.py --split external_entity_test --language en --name vcb_turbo
+.venv/bin/python experiments/eval_entities.py        # exact values (VoiceCodeBench)
+.venv/bin/python experiments/train_completion.py     # completion model
+.venv/bin/python experiments/eval_endpointing.py     # smart listening (LiveKit)
+.venv/bin/python experiments/synth.py && .venv/bin/python experiments/eval_dev.py   # synthetic dev set
+.venv/bin/python experiments/eval_hindi.py           # Hindi / Hinglish
+.venv/bin/python experiments/robustness.py && .venv/bin/python experiments/speed.py
+.venv/bin/python experiments/error_analysis.py && .venv/bin/python experiments/make_figures.py
+.venv/bin/python -m unittest discover -s tests       # unit + failure-handling tests
 ```
 
-## Use the prepared data
+Cached speech-model outputs are in `results/asr/`, so the scoring steps run in seconds without re-transcribing.
 
-```python
-from src.listening_data import iter_inputs, iter_supervised
+## Repository map
 
-inputs, gold = next(iter_supervised("train"))
-audio_path = inputs["audio_path"]
-reference = gold["reference_nfc"]
+| Path | What |
+|---|---|
+| `eariq/` | The capture layer: `asr.py` (speech model), `normalize.py` (format-aware hearing), `capture.py` (values, checks, double-check), `endpointing.py` + `vad.py` (smart listening) |
+| `app/` | FastAPI service (`server.py`) and the web app / monitor (`static/`) |
+| `experiments/` | Every experiment script (M3–M5) and the experiment logger |
+| `results/` | Metrics (`*.json`), experiment log, figures, cached ASR outputs |
+| `models/` | Trained completion models (scikit-learn) |
+| `docs/` | Report, demo script, viva prep, data cards, privacy policy |
+| `scripts/`, `src/`, `reports/`, `notebooks/` | M2 data preparation, loader, EDA |
 
-# Choose exactly one contextual benchmark condition for each experiment.
-example = next(iter_inputs("validation", context_level=1))
+## Handbook checklist (Industry Track)
 
-# Test and external gold require explicit evaluation opt-in.
-example, gold = next(iter_supervised("test", allow_evaluation_labels=True))
-```
+| Milestone | Deliverable | Where |
+|---|---|---|
+| M1 | Problem brief, users, objective, success metrics, feasibility | M1 deck PDF, `M1 script.md`, report §1 |
+| M2 | Data card, EDA, cleaning, splits, privacy | `docs/data_cards/`, `notebooks/M2_EDA.ipynb`, `reports/`, `docs/PRIVACY.md` |
+| M3 | Baseline, candidate approaches, version control, experiment log | `eariq/`, `experiments/`, Git history, `results/experiment_log.csv` |
+| M4 | Evaluation report, error analysis, improvement iterations, robustness, optimisation, inference | Report §5–8, `results/*.json`, `experiments/run_asr.py` (batch inference) |
+| M5 | Working app/API, deployment, performance, monitoring, failure handling | `app/`, `Dockerfile`, `results/performance.json`, `/monitor`, `tests/test_capture_layer.py` |
+| M6 | Technical report, GitHub repo, live demo, business presentation, viva | `docs/report/`, this repo, `docs/DEMO_SCRIPT.md`, `docs/EarIQ_Presentation.pptx`, `docs/VIVA_PREP.md` |
 
-`train`, `validation` and `test` refer to the **custom Hindi corpus**, not to all sources pooled together. `external_entity_test` and `external_timing_test` preserve separate public evaluation sets. Raw labels/audio are excluded from Git. Always review individual source terms before redistribution or new uses.
+## Data and privacy
 
-## Project layout
-
-| Location | Purpose |
-| --- | --- |
-| `configs/` | Source pins and original PDF hashes |
-| `scripts/` | Acquisition, cleaning/grouped splits, EDA, report generation and verification |
-| `src/listening_data.py` | Gold-separated baseline loader |
-| `data/raw/` | Restricted downloaded files, source metadata and download checksums |
-| `data/audio/` | Derived 16 kHz mono PCM16 audio |
-| `data/manifests/` | Input, gold and optional-context files for each split |
-| `data/processed/` | Label-aware analytical records; cleaning/exclusion ledger |
-| `reports/` | Actual counts, statistical summaries, split audit, figures and verification |
-| `docs/` | Data cards, notices and privacy/use restrictions |
-| `tests/` | Value preservation, split-overlap and label-leakage checks |
-| `research/` | Historical planning/audit documents; see latest scope note |
-
-M2 prepares three tasks: Hindi contextual recognition, English exact structured-value evaluation and English/Hindi turn timing. It does not claim new model accuracy, full Indian-English/Hinglish representativeness, human-adjudicated entity audio boundaries or measured interactive repair. Those distinctions are documented so future model comparisons remain meaningful.
+Public, licensed datasets only (VoiceCodeBench, LiveKit eot-bench, IndicContextEval); raw audio is not redistributed. All demo and development voices are synthetic and all values are fictional. The app stores no audio and masks values in its logs. See [`docs/PRIVACY.md`](docs/PRIVACY.md).

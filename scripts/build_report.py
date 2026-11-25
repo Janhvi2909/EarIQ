@@ -11,7 +11,9 @@ SRC = ROOT / "docs/report/EarIQ_Technical_Report.md"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 CSS = """
 @page { size: A4; margin: 18mm 17mm 18mm 17mm; }
-body { font-family: Inter, -apple-system, "Segoe UI", Roboto, sans-serif; color: #10152a; font-size: 10.4pt; line-height: 1.5; }
+html, body { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+body { font-family: Inter, -apple-system, "Segoe UI", Roboto, sans-serif; color: #10152a; font-size: 10.4pt; line-height: 1.5; hyphens: none; }
+#title-block-header { display: none; }
 h1 { font-size: 21pt; letter-spacing: -.02em; margin: 0 0 4pt; page-break-before: always; }
 h1:first-of-type { page-break-before: avoid; }
 h1.title { display: none; }
@@ -21,7 +23,7 @@ p { margin: 5pt 0; }
 table { border-collapse: collapse; width: 100%; margin: 8pt 0 10pt; font-size: 9.2pt; page-break-inside: avoid; }
 th { background: #f0eeff; color: #2b2f8f; text-align: left; padding: 5pt 6pt; border-bottom: 1.5pt solid #c9c2ff; }
 td { padding: 4pt 6pt; border-bottom: .5pt solid #e5e7f0; vertical-align: top; }
-img { max-width: 100%; display: block; margin: 8pt auto; page-break-inside: avoid; }
+img { width: 100%; max-width: 100%; display: block; margin: 8pt auto; page-break-inside: avoid; }
 figure { margin: 8pt 0; page-break-inside: avoid; }
 figcaption { font-size: 8.8pt; color: #6b7290; text-align: center; }
 code { font-family: Menlo, monospace; font-size: 8.8pt; background: #f4f5f9; padding: 0 3pt; border-radius: 3pt; }
@@ -35,7 +37,9 @@ blockquote { border-left: 3pt solid #5b4cf0; margin: 8pt 0; padding: 4pt 10pt; b
 """
 
 
-def main():
+def main(src: Path = SRC):
+    global SRC
+    SRC = src
     html = pypandoc.convert_file(str(SRC), "html5", extra_args=["--standalone", "--metadata", "title=EarIQ Technical Report",
                                                               f"--resource-path={SRC.parent}"])
     html = html.replace("</head>", f"<style>{CSS}</style></head>")
@@ -51,4 +55,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else SRC)
