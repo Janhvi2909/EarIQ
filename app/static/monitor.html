@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EarIQ · Monitor</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235b4cf0'/%3E%3Cpath d='M9 18v-4M13 21V11M17 24V8M21 20v-8M25 17v-2' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="/"><span class="logo-mark"><svg viewBox="0 0 32 32"><path d="M9 18v-4M13 21V11M17 24V8M21 20v-8M25 17v-2"/></svg></span>EarIQ</a>
+      <nav class="links"><a href="/#try">Try it</a><a href="/#how">How it works</a><a href="/#results">Results</a><a href="/monitor" style="color:var(--ink)">Monitor</a></nav>
+      <span class="status" id="status"><i></i><span>Connecting</span></span>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="mon-head">
+      <div><h1>Monitor</h1><div class="muted" id="uptime">Live · refreshes every 3s</div></div>
+      <a class="btn ghost" href="/metrics" style="text-decoration:none">Prometheus /metrics</a>
+    </div>
+    <div class="kpis">
+      <div class="card kpi"><div class="k">Requests</div><div class="v" id="k-req">0</div><div class="d" id="k-req-d">since start</div></div>
+      <div class="card kpi"><div class="k">Latency p50 / p95</div><div class="v" id="k-lat">–</div><div class="d" id="k-layer">EarIQ layer –</div></div>
+      <div class="card kpi"><div class="k">Follow-up rate</div><div class="v" id="k-ask">0%</div><div class="d" id="k-ask-d">confirm + ask again</div></div>
+      <div class="card kpi"><div class="k">Errors</div><div class="v" id="k-err">0</div><div class="d" id="k-err-d">0 fallbacks</div></div>
+    </div>
+    <div class="row2">
+      <div class="card panel">
+        <h3>Response time (last 60 requests)</h3>
+        <svg class="spark" id="spark" viewBox="0 0 600 120" preserveAspectRatio="none">
+          <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5b4cf0" stop-opacity=".25"/><stop offset="1" stop-color="#5b4cf0" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="card panel">
+        <h3>Alerts</h3>
+        <ul class="alerts" id="alerts"></ul>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="card panel">
+        <h3>Recent requests</h3>
+        <table><thead><tr><th>Time</th><th>Field</th><th>Outcome</th><th>Value</th><th>Latency</th></tr></thead><tbody id="recent"></tbody></table>
+      </div>
+      <div class="card panel">
+        <h3>Outcomes</h3>
+        <div class="bars" id="bars"></div>
+        <h3 style="margin-top:22px">Languages</h3>
+        <div class="bars" id="langs"></div>
+      </div>
+    </div>
+    <p class="muted small" style="margin-top:18px">No audio or transcripts are stored. Values are masked in logs.</p>
+  </main>
+  <script src="/static/monitor.js"></script>
+</body>
+</html>

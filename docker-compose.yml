@@ -1,0 +1,11 @@
+services:
+  eariq:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - models:/models        # speech model is downloaded once and cached here
+      - ./logs:/app/logs      # request logs (no audio, values masked)
+    restart: unless-stopped
+volumes:
+  models:
