@@ -213,8 +213,8 @@ async function icon(names, color = "#5B4CF0", size = 256) {
   // ---------- 9. Result: double-check + Hindi ----------
   s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Results" });
   const dc = ent.double_check;
-  s.addText("Result 3: asks rarely, and works for Hindi too", { placeholder: "title" });
-  kicker(s, "Targeted questions instead of re-asking everything; Hindi and Hinglish speech with key-term hints");
+  s.addText("Result 3: asks rarely; Hindi is the hard frontier", { placeholder: "title" });
+  kicker(s, "Targeted questions instead of re-asking everything; the same pipeline on Hindi and Hinglish speech");
   card(s, 0.6, 1.95, 5.9, 3.55);
   await iconDot(s, ["LuCircleHelp", "LuHelpCircle"], 0.95, 2.25);
   s.addText("Smart double-check", { x: 1.75, y: 2.3, w: 4.6, h: 0.5, fontSize: 16, bold: true, color: HEX.ink, margin: 0, isTextBox: true });
@@ -230,7 +230,8 @@ async function icon(names, color = "#5B4CF0", size = 256) {
     if (best !== "H0_no_hints") ht.push(["Key-term hints", pct(hb.wer, 1), pct(hb.cer, 1), pct(hb.term_error, 1)]);
     s.addTable(ht, { x: 7.15, y: 2.95, w: 5.25, colW: [2.05, 0.9, 0.9, 1.4], fontSize: 13, color: HEX.ink, border: { type: "solid", pt: 0.75, color: HEX.line }, rowH: 0.5 });
     const v6 = hindi.validation_subset.H6_unrelated_terms, v0 = hindi.validation_subset.H0_no_hints;
-    s.addText(`Wrong hints (unrelated terms) on validation: WER ${pct(v6.wer, 1)} vs ${pct(v0.wer, 1)} with none.`,
+    const v5 = hindi.validation_subset.H5_key_terms;
+    s.addText(`Hint lists didn't help Whisper: key-term hints raised borrowed-term error ${pct(v0.term_error)} → ${pct(v5.term_error)} on validation, so EarIQ uses no hints. Honest negative result.`,
       { x: 7.15, y: 4.6, w: 5.25, h: 0.75, fontSize: 12, color: HEX.ink2, margin: 0, valign: "top", isTextBox: true });
   }
   s.addText("Thresholds and hint settings were chosen on development data; the test sets were scored once.",
@@ -295,7 +296,7 @@ async function icon(names, color = "#5B4CF0", size = 256) {
   s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Product" });
   s.addText("M5: a working product, not a notebook", { placeholder: "title" });
   kicker(s, "Web app + REST API + monitoring + failure handling, deployable with Docker");
-  s.addImage({ path: path.join(ROOT, "docs/images/app_name_compare.png"), x: 0.6, y: 1.85, w: 7.0, h: 3.31 });
+  s.addImage({ path: path.join(ROOT, "docs/images/app_phone_compare.png"), x: 0.6, y: 1.85, w: 7.0, h: 3.31 });
   const feats = [[["LuServer"], "REST API", "POST /api/v1/capture → value + save / confirm / ask"],
                  [["LuActivity"], "Monitoring", "latency, follow-up rate, errors, alerts; values masked"],
                  [["LuShieldCheck"], "Failure handling", "empty, corrupt, silent, too-long audio, timeouts, busy"],
