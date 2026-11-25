@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EarIQ · Voice AI that gets the details right</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235b4cf0'/%3E%3Cpath d='M9 18v-4M13 21V11M17 24V8M21 20v-8M25 17v-2' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="/">
+        <span class="logo-mark"><svg viewBox="0 0 32 32"><path d="M9 18v-4M13 21V11M17 24V8M21 20v-8M25 17v-2"/></svg></span>
+        EarIQ
+      </a>
+      <nav class="links">
+        <a href="#try">Try it</a>
+        <a href="#how">How it works</a>
+        <a href="#results">Results</a>
+        <a href="/monitor">Monitor</a>
+      </nav>
+      <span class="status" id="status"><i></i><span>Loading model</span></span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Capture layer for voice AI</span>
+      <h1>Voice AI that gets<br>the details right.</h1>
+      <p>Phone numbers, emails, names and IDs, captured exactly. Even when you pause.</p>
+    </section>
+
+    <section class="card studio" id="try">
+      <div class="step"><span class="num">1</span>What is the agent asking for?</div>
+      <div class="chips" id="fields">
+        <button class="chip active" data-field="phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Phone</button>
+        <button class="chip" data-field="email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</button>
+        <button class="chip" data-field="name"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Name</button>
+        <button class="chip" data-field="id"><svg viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>Order ID</button>
+      </div>
+
+      <div class="bubble agent"><span class="avatar">AI</span><span id="agent-q">What's the best number to reach you?</span></div>
+
+      <div class="step"><span class="num">2</span>Answer out loud</div>
+      <div class="recorder">
+        <button class="mic" id="mic" aria-label="Start recording">
+          <svg class="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          <svg class="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+        </button>
+        <div class="rec-info">
+          <div class="rec-title" id="rec-title">Tap to speak</div>
+          <div class="rec-sub" id="rec-sub">Try pausing in the middle. EarIQ will wait.</div>
+          <div class="meter" id="meter"></div>
+        </div>
+      </div>
+
+      <div class="samples">
+        <span class="muted">Or play a sample</span>
+        <button class="sample" data-sample="phone" data-field="phone" data-gold="9876543210"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Number with a pause</button>
+        <button class="sample" data-sample="email" data-field="email" data-gold="rahul.verma@example.com"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Email, "at the rate"</button>
+        <button class="sample" data-sample="name" data-field="name" data-gold="Rina Kell"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Spelled name</button>
+        <button class="sample" data-sample="order" data-field="id" data-gold="ORD-447B"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Order ID</button>
+      </div>
+    </section>
+
+    <section class="results" id="out" hidden>
+      <div class="step"><span class="num">3</span>See the difference</div>
+      <div class="loading card" id="loading">
+        <div class="spinner"></div>
+        <ol class="progress"><li class="on">Transcribing</li><li>Formatting values</li><li>Checking</li></ol>
+      </div>
+      <div class="error card" id="error" hidden></div>
+      <div class="compare" id="compare" hidden>
+        <article class="card result normal">
+          <header><span class="tag">Typical voice AI</span><span class="pill" id="n-pill"></span></header>
+          <div class="timeline" id="n-tl"></div>
+          <div class="label">Heard</div>
+          <p class="transcript" id="n-text"></p>
+          <div class="label">Saved</div>
+          <div class="value" id="n-value"></div>
+          <div class="bubble agent small"><span class="avatar">AI</span><span id="n-reply"></span></div>
+        </article>
+        <article class="card result eariq">
+          <header><span class="tag brand">EarIQ</span><span class="pill" id="e-pill"></span></header>
+          <div class="timeline" id="e-tl"></div>
+          <div class="label">Heard</div>
+          <p class="transcript" id="e-text"></p>
+          <div class="label">Captured</div>
+          <div class="value" id="e-value"></div>
+          <ul class="checks" id="e-checks"></ul>
+          <div class="bubble agent small"><span class="avatar">AI</span><span id="e-reply"></span></div>
+          <div class="confirm" id="e-confirm" hidden>
+            <button class="btn primary" data-ok="1">Yes, that's right</button>
+            <button class="btn ghost" data-ok="0">No, fix it</button>
+          </div>
+        </article>
+      </div>
+      <p class="meta" id="meta"></p>
+    </section>
+
+    <section class="how" id="how">
+      <h2>Three small things, done right</h2>
+      <div class="grid3">
+        <div class="card feature">
+          <span class="ficon"><svg viewBox="0 0 24 24"><path d="M3 12h3l3-7 4 14 3-7h5"/></svg></span>
+          <h3>Smart listening</h3>
+          <p>Waits while a number or email is still coming.</p>
+        </div>
+        <div class="card feature">
+          <span class="ficon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/><path d="m15 17 2 2 4-4"/></svg></span>
+          <h3>Format-aware hearing</h3>
+          <p>"Nine eight seven…" becomes <b>98765 43210</b>.</p>
+        </div>
+        <div class="card feature">
+          <span class="ficon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span>
+          <h3>Smart double-check</h3>
+          <p>Asks only about the part it's unsure of.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" id="results">
+      <h2>Measured, not promised</h2>
+      <div class="grid3" id="proof">
+        <div class="card stat"><div class="big">–</div><div class="cap">Loading results…</div></div>
+      </div>
+      <p class="muted small" id="proof-note"></p>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <span><b>EarIQ</b> · NLP Industry Project</span>
+    <span class="muted">Janhvi Yadav · Ronit Choudhary · Asmit Kumar · Vaishnav Verma</span>
+  </footer>
+  <audio id="player" hidden></audio>
+  <script src="/static/app.js"></script>
+</body>
+</html>
