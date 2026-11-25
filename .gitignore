@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.DS_Store
+data/raw/
+data/audio/
+data/processed/
+data/manifests/
+.env
+*.token
+.cache/
+logs/
+data/synthetic/audio/
+results/asr/*.log
+*.pyc
+NLP_Project_Milestone_Handbook*.pdf

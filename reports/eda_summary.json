@@ -1,0 +1,69 @@
+{
+  "total_rows": 4202,
+  "total_hours": 17.21052689236111,
+  "entity_instances": 1482,
+  "entity_types": 26,
+  "hindi_source_code_mixing_true": 1973,
+  "hindi_extempore": 1868,
+  "pause_instances": 2324,
+  "hold_instances": 1524,
+  "eot_instances": 800,
+  "resampled_rows": 300,
+  "active_channel_selected_rows": 5,
+  "text_normalised_rows": 1083,
+  "source_code_mixing_label_not_independent_language_audit": true,
+  "manifest_files": {
+    "external_entity_test.jsonl": {
+      "rows": 300,
+      "bytes": 81439
+    },
+    "external_timing_test.jsonl": {
+      "rows": 800,
+      "bytes": 1262114
+    },
+    "train.jsonl": {
+      "rows": 2169,
+      "bytes": 567235
+    },
+    "test.jsonl": {
+      "rows": 467,
+      "bytes": 122161
+    },
+    "test_labels.jsonl": {
+      "rows": 467,
+      "bytes": 1204314
+    },
+    "test_context.jsonl": {
+      "rows": 467,
+      "bytes": 1876072
+    },
+    "external_timing_test_labels.jsonl": {
+      "rows": 800,
+      "bytes": 2014871
+    },
+    "train_context.jsonl": {
+      "rows": 2169,
+      "bytes": 8607777
+    },
+    "validation.jsonl": {
+      "rows": 466,
+      "bytes": 121919
+    },
+    "train_labels.jsonl": {
+      "rows": 2169,
+      "bytes": 5260483
+    },
+    "validation_labels.jsonl": {
+      "rows": 466,
+      "bytes": 1192632
+    },
+    "validation_context.jsonl": {
+      "rows": 466,
+      "bytes": 1854769
+    },
+    "external_entity_test_labels.jsonl": {
+      "rows": 300,
+      "bytes": 1506293
+    }
+  }
+}

@@ -1,0 +1,5 @@
+source,original_sample_rate,original_channels,selected_channel,rows
+indiccontext,16000,1,0,3102
+livekit,16000,1,0,800
+voicecodebench,48000,1,0,295
+voicecodebench,48000,2,1,5

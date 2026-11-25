@@ -1,0 +1,70 @@
+split,domain,rows
+test,Academic Research & Publishing,5
+test,Animal Sciences,37
+test,Architecture & Urban Planning,10
+test,Arts,6
+test,Audio & Media Technology,5
+test,Business,56
+test,Core Engineering,47
+test,Culinary Arts & Food Science,15
+test,Data Science,62
+test,Defense & Armed Forces,10
+test,Film & Media Production,19
+test,Forensics & Legal Sciences,5
+test,Fundamental Sciences,30
+test,Gaming & Media,1
+test,Humanities,51
+test,Linguistics,12
+test,Materials Science,10
+test,Medical Sciences,8
+test,Robotics & Automation Engineering,5
+test,Skilled Trades,15
+test,Social Sciences,48
+test,Supply Chain & Logistics,4
+test,Textiles & Fashion,6
+train,Academic Research & Publishing,161
+train,Animal Sciences,78
+train,Architecture & Urban Planning,38
+train,Arts,10
+train,Audio & Media Technology,24
+train,Business,34
+train,Core Engineering,199
+train,Culinary Arts & Food Science,49
+train,Data Science,200
+train,Defense & Armed Forces,32
+train,Film & Media Production,99
+train,Forensics & Legal Sciences,14
+train,Fundamental Sciences,184
+train,Gaming & Media,7
+train,Humanities,164
+train,Linguistics,297
+train,Materials Science,21
+train,Medical Sciences,134
+train,Robotics & Automation Engineering,93
+train,Skilled Trades,46
+train,Social Sciences,171
+train,Supply Chain & Logistics,96
+train,Textiles & Fashion,18
+validation,Academic Research & Publishing,8
+validation,Animal Sciences,1
+validation,Architecture & Urban Planning,4
+validation,Arts,5
+validation,Audio & Media Technology,5
+validation,Business,37
+validation,Core Engineering,43
+validation,Culinary Arts & Food Science,11
+validation,Data Science,56
+validation,Defense & Armed Forces,9
+validation,Film & Media Production,19
+validation,Forensics & Legal Sciences,6
+validation,Fundamental Sciences,50
+validation,Gaming & Media,3
+validation,Humanities,58
+validation,Linguistics,10
+validation,Materials Science,2
+validation,Medical Sciences,13
+validation,Robotics & Automation Engineering,10
+validation,Skilled Trades,14
+validation,Social Sciences,87
+validation,Supply Chain & Logistics,9
+validation,Textiles & Fashion,6

@@ -1,0 +1,31 @@
+{
+  "rows": 4202,
+  "excluded": 8,
+  "sources": {
+    "voicecodebench": 300,
+    "livekit": 800,
+    "indiccontext": 3102
+  },
+  "split": {
+    "seed": 20261028,
+    "target_proportions": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "selection_criteria": "sample counts, domain coverage, source code-mixing/style proportions; no model scores",
+    "connected_components": 116,
+    "largest_component_rows": 334,
+    "counts": {
+      "validation": 466,
+      "train": 2169,
+      "test": 467
+    }
+  },
+  "qc_flag_counts": {
+    "clipping_gt_0.1pct": 2,
+    "declared_duration_mismatch": 2
+  },
+  "status": "prepared",
+  "no_model_results": true
+}

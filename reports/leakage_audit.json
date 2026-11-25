@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "sample_ids_unique": true,
+  "overlap_counts": {
+    "speaker_group:train:validation": 0,
+    "speaker_group:train:test": 0,
+    "speaker_group:validation:test": 0,
+    "reference_sha256:train:validation": 0,
+    "reference_sha256:train:test": 0,
+    "reference_sha256:validation:test": 0,
+    "audio_sha256:train:validation": 0,
+    "audio_sha256:train:test": 0,
+    "audio_sha256:validation:test": 0,
+    "split_component:train:validation": 0,
+    "split_component:train:test": 0,
+    "split_component:validation:test": 0,
+    "external_vs_internal:reference_sha256": 0,
+    "external_vs_internal:audio_sha256": 0
+  },
+  "limitations": [
+    "No verified cross-source speaker identity mapping.",
+    "No assurance that pretrained vendors never saw public benchmark audio.",
+    "Distinct domain terms may intentionally recur; exact repeated utterances are grouped.",
+    "No acoustic near-duplicate or semantic-paraphrase detector; exact hashes only."
+  ]
+}

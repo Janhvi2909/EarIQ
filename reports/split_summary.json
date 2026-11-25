@@ -1,0 +1,16 @@
+{
+  "seed": 20261028,
+  "target_proportions": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "selection_criteria": "sample counts, domain coverage, source code-mixing/style proportions; no model scores",
+  "connected_components": 116,
+  "largest_component_rows": 334,
+  "counts": {
+    "validation": 466,
+    "train": 2169,
+    "test": 467
+  }
+}

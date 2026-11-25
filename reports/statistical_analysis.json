@@ -1,0 +1,34 @@
+{
+  "indiccontext_mean_duration_s": {
+    "estimate": 10.53139224693746,
+    "ci95_low": 9.919770210318845,
+    "ci95_high": 11.100642564241374,
+    "groups": 124,
+    "resamples": 2000,
+    "seed": 20261028
+  },
+  "voicecodebench_mean_duration_s": {
+    "estimate": 67.03945499999999,
+    "ci95_low": 64.87292187242289,
+    "ci95_high": 69.49331809839792,
+    "groups": 85,
+    "resamples": 2000,
+    "seed": 20261028
+  },
+  "hindi_source_label_code_mixing_fraction": {
+    "estimate": 0.6360412637008381,
+    "ci95_low": 0.5729650813405084,
+    "ci95_high": 0.6958440569478814,
+    "groups": 124,
+    "resamples": 2000,
+    "seed": 20261028
+  },
+  "hindi_read_minus_extempore_mean_duration_s": {
+    "estimate": 2.7254635448299265,
+    "ci95_low": 1.8867263405110561,
+    "ci95_high": 3.6016596645103354,
+    "groups": 124,
+    "resamples": 2000,
+    "seed": 20261028
+  }
+}

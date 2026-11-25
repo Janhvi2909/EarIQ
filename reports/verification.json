@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "rows_verified": 4202,
+  "split_counts": {
+    "train": 2169,
+    "validation": 466,
+    "test": 467,
+    "external_entity_test": 300,
+    "external_timing_test": 800
+  },
+  "audio_headers_verified": true,
+  "label_input_id_alignment": true,
+  "original_pdfs_unchanged": true,
+  "executed_notebook_cells": 6,
+  "downloaded_files_size_verified": 313,
+  "downloaded_files_upstream_lfs_hash_verified": 305,
+  "manifest_sha256": {
+    "data/manifests/external_entity_test.jsonl": "12f7693f82d71bc659a7cb5fbbd1c5896db473b355da608058f9ee35a14a9b17",
+    "data/manifests/external_entity_test_labels.jsonl": "e71370cfc066c88be73805a7789a4c517066cf313c8df29cc5ac9a7b99fa9605",
+    "data/manifests/external_timing_test.jsonl": "4cebf8ded0c0e167e09dfd76aabe11f138f0e7bf62339180ea699aa49b2315bf",
+    "data/manifests/external_timing_test_labels.jsonl": "967bd2c3336c9af5f1fbb670f07bf84886314728f5edbe1ef36e38953ccc53e7",
+    "data/manifests/test.jsonl": "5ca671e0554bd379b791093441a05e6972a661e2bebf427dfb6908f3f3c32724",
+    "data/manifests/test_context.jsonl": "90dc50ac7f3355bf377bc5aecc42afcbbac0cbb83c37efaf67d4ef3f6289bf7f",
+    "data/manifests/test_labels.jsonl": "315c626a27b0c3fac81e8d333b866b1885fd75e1b1cbd2ac9ebe4b01aae1a700",
+    "data/manifests/train.jsonl": "b8ec40633a9187e5d9433058d6bdd012d150ca435002c2afee80bab2cc7a1081",
+    "data/manifests/train_context.jsonl": "44aa8f60f999ebd080909ed9681a02a879c2bdf37edcf6175069cab5d7deaa06",
+    "data/manifests/train_labels.jsonl": "e384cb5ee6fd4a95c56cfcf4a6ee48a268a570f032ec1af46bf0537929a142da",
+    "data/manifests/validation.jsonl": "4d40fbf4d814165d2c5c15370487454afdff0dceb158d0d7139b7782ca8c0494",
+    "data/manifests/validation_context.jsonl": "acb09bf76a6e26d0455b3f1b0f1569b3db6998acdcb763c90d9ec6bab5d47d7a",
+    "data/manifests/validation_labels.jsonl": "2a3c360ba0019b2d06cbf8f800b856fd3495c54b14e0e88a5375e82336ced496"
+  },
+  "limitations": "Exact overlap checks only; no cross-source speaker-identity proof or pretraining-contamination proof."
+}
